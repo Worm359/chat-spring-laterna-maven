@@ -1,0 +1,57 @@
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--<pattern>%date{dd.MM.yyyy HH:mm:ss.SSS} [%thread] %-5level %class{0}:%line - %message%n</pattern>-->
+            <pattern>%d{dd.MM.yyyy HH:mm} %-5level %class{0}: %message%n</pattern>
+            <charset>windows-1251</charset>
+        </encoder>
+        <!--<filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+        <!--<level>ERROR</level>-->
+        <!--</filter>-->
+    </appender>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>
+            ./logs/chat.log
+        </file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+	        <fileNamePattern>chat%i.log</fileNamePattern>
+	        <minIndex>1</minIndex>
+	        <maxIndex>10</maxIndex>
+	    </rollingPolicy>
+
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <!--<fileNamePattern>mobile_service-%d{yyyy-MM-dd}.%i.log</fileNamePattern>-->
+            <!-- each file should be at most 100MB, keep 60 days worth of history, but at most 20GB -->
+            <maxFileSize>100MB</maxFileSize>
+            <!--<maxHistory>60</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>-->
+        </triggeringPolicy>
+
+        <encoder>
+            <!--<pattern>%date{dd.MM.yyyy HH:mm:ss.SSS} [%thread] %-5level %class{0}:%line - %message%n</pattern>-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %class{0}: %message%n</pattern>
+            <charset>windows-1251</charset>
+        </encoder>
+        <!--<filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+        <!--<level>ERROR</level>-->
+        <!--</filter>-->
+    </appender>
+    <root level="ERROR">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+    <logger name="ru" level="TRACE" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE" />
+    </logger>
+    <!--<logger name="service" level="TRACE" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE" />
+    </logger>-->
+    <!--<logger name="org.hibernate.SQL" level="DEBUG" />-->
+    <!--<logger name="org.hibernate.type" level="TRACE" />-->
+    <!--<logger name="org.hibernate.stat" level="TRACE" />-->
+    <!--<logger name="org.hibernate.cache" level="TRACE" />-->
+
+    <!--<logger name="ru.mfd.portal2.bizlogic" level="DEBUG" />-->
+</configuration>
